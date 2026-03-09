@@ -10,14 +10,6 @@ import { initializeApp } from 'firebase/app'
 import { getFirestore, doc, setDoc } from 'firebase/firestore'
 
 // REPLACE WITH YOUR VALUES FROM .env.local
-const firebaseConfig = {
-  apiKey: 'AIzaSyDFaEkNOSO-aKd6JU9rvrLEta6CdfxY9Dc',
-  authDomain: 'greenroi-pro.firebaseapp.com',
-  projectId: 'greenroi-pro',
-  storageBucket: 'greenroi-pro.firebasestorage.app',
-  messagingSenderId: '328249904858',
-  appId: '1:328249904858:web:d56e9ed6dd841b51951fe3',
-}
 
 const app = initializeApp(firebaseConfig)
 const db = getFirestore(app)
