@@ -1,0 +1,25 @@
+{
+  "name": "greenroi-widget",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "build:widget": "vite build --config vite.widget.config.js"
+  },
+  "dependencies": {
+    "axios": "^1.6.2",
+    "dotenv": "^17.2.3",
+    "firebase": "^10.7.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.2.1",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.32",
+    "tailwindcss": "^3.4.1",
+    "vite": "^5.0.8"
+  }
+}

@@ -1,0 +1,81 @@
+# The "GreenROI Global" Master Prompt
+
+**Role:** You are an expert Full-Stack Architect specializing in React 19, Tailwind CSS, and Firebase (Firestore/Auth).
+**Objective:** Build "GreenROI Global," a multi-tenant, location-intelligent lead generation widget for 2026 green energy installers.
+
+### 1. PRODUCT VISION
+
+We are building an embeddable widget that businesses (Tenants) place on their websites. The widget must:
+
+1. **Detect Location:** Use IP-based detection or a Zip/Postcode input to identify the user's country.
+2. **Dynamic Logic:** Fetch "Logic Packs" from a global database (Grants, Energy Prices, Currency) based on the country.
+3. **Qualify Leads:** Ask region-specific questions (e.g., "Are you in a District Heating area?" for Denmark or "Do you have federal tax liability?" for the US).
+4. **Calculate ROI:** Show a 10-year financial roadmap using real 2026 figures.
+5. **Capture Data:** Collect the user's info to unlock the full report, then send that lead to the specific Tenant's dashboard.
+
+### 2. DATABASE ARCHITECTURE (Firestore)
+
+Please set up the logic to interact with these three collections:
+
+**A. `global_regions` (The Brain)**
+
+* **Document ID:** (e.g., "uk", "us", "denmark")
+* **Fields:**
+* `currency`: String (e.g., "£", "$", "DKK")
+* `energyRate`: Number (e.g., UK: 0.28, Denmark: 2.75)
+* `grantName`: String
+* `grantValue`: Number
+* `grantType`: String ("fixed" or "percentage")
+* `qualifiers`: Array of Objects (Question text + Logic key)
+
+
+
+**B. `tenants` (The Clients)**
+
+* **Document ID:** Unique Tenant ID (e.g., "alex-solar-001")
+* **Fields:**
+* `businessName`: String
+* `brandColor`: String (Hex)
+* `logoUrl`: String
+* `bookingLink`: String (Calendly)
+
+
+
+**C. `leads` (The Results)**
+
+* **Fields:** `tenantId`, `userEmail`, `userPhone`, `country`, `calculatedSavings`, `timestamp`.
+
+### 3. THE CALCULATION ENGINE (2026 Logic)
+
+The ROI must be calculated using this core formula:
+
+
+**Example Data for 2026:**
+
+* **UK:** Grant = £7,500 (Fixed BUS Grant). Energy = £0.28/kWh.
+* **Denmark:** Grant = 27,000 DKK (Varmepumpepuljen). Energy = 2.75 DKK/kWh.
+* **USA:** Grant = 30% (Sec 48E Lease Credit). Energy = $0.19/kWh.
+
+### 4. UI/UX REQUIREMENTS
+
+* **Framework:** React 19 with Tailwind CSS.
+* **The "Chameleon" Rule:** The UI must be unbranded by default. On load, fetch the `tenant` config and apply `brandColor` to all buttons and accents.
+* **Step-by-Step Flow:**
+1. **Location Gate:** "Where are you located?" (Detects UK/US/DK).
+2. **Home Details:** Bill amount, current heating type (Gas/Oil/Electric).
+3. **Qualifiers:** Country-specific Yes/No questions.
+4. **Lead Capture:** Email/Phone field with a "See My Savings" button.
+5. **Results:** Interactive 10-year savings graph.
+
+
+
+---
+
+### 5. EXECUTION STEPS
+
+1. **Step 1:** Create a `useLocation` hook that identifies the country and fetches the corresponding `global_regions` document.
+2. **Step 2:** Create a `CalculatorContext` to manage the state across the multi-step form.
+3. **Step 3:** Build the dynamic form component that renders different questions based on the `qualifiers` array in the logic pack.
+4. **Step 4:** Implement the calculation utility and the Firestore submission logic.
+
+**Please start by drafting the `global_regions` JSON structure and the `useLocation` hook.**
